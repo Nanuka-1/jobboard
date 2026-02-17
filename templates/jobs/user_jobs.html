@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Jobs by {{ user.full_name }}{% endblock %}
+
+{% block content %}
+
+<div class="d-flex align-items-center gap-3 mb-4">
+  {% if user.image_filename %}
+    <img
+      src="{{ url_for('static', filename='uploads/' ~ user.image_filename) }}"
+      alt="Profile photo"
+      class="rounded-circle"
+      style="width:96px;height:96px;object-fit:cover;"
+    >
+  {% else %}
+    <div class="rounded-circle bg-secondary-subtle"
+         style="width:96px;height:96px;"></div>
+  {% endif %}
+
+  <div>
+    <h1 class="mb-1">Jobs by {{ user.full_name }}</h1>
+    <div class="text-secondary">{{ user.email }}</div>
+  </div>
+</div>
+
+{% if not jobs %}
+  <div class="alert alert-secondary">No jobs posted by this user yet.</div>
+{% else %}
+  <div class="row g-3">
+    {% for job in jobs %}
+      <div class="col-12 col-lg-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title mb-1">
+              <a class="text-decoration-none" href="{{ url_for('job_detail', job_id=job.id) }}">
+                {{ job.title }}
+              </a>
+            </h5>
+
+            <div class="text-secondary small mb-2">
+              {{ job.company_name }} · {{ job.location }}
+              {% if job.category %}
+                · {{ job.category.name }}
+              {% endif %}
+            </div>
+
+            <p class="card-text mb-3">
+              {{ job.short_description }}
+            </p>
+
+            <a class="btn btn-sm btn-outline-primary" href="{{ url_for('job_detail', job_id=job.id) }}">
+              Read more
+            </a>
+          </div>
+
+          <div class="card-footer bg-white border-top-0 text-secondary small">
+            Posted: {{ job.created_at.strftime('%Y-%m-%d %H:%M') }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% endblock %}

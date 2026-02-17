@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}404 - Not Found{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-start gap-3">
+          <div class="display-6 fw-bold text-danger">404</div>
+          <div>
+            <h1 class="h4 mb-1">Page not found</h1>
+            <p class="text-muted mb-0">
+              The page you’re looking for doesn’t exist or was moved.
+            </p>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-primary" href="{{ url_for('jobs') }}">Back to Jobs</a>
+          <a class="btn btn-outline-secondary" href="{{ url_for('about') }}">About</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

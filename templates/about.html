@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}About · JobBoard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h1 class="h2 mb-0">About JobBoard</h1>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <p class="mb-2">
+          <strong>JobBoard</strong> is a web portal where you can browse and search job vacancies, and (after logging in) add your own posts.
+        </p>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <h2 class="h6 mb-2">Guest (without login)</h2>
+              <ul class="mb-0">
+                <li>Browse the list of vacancies</li>
+                <li>Search by title/company/description, location, and category</li>
+                <li>View this About page</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <h2 class="h6 mb-2">Logged-in user</h2>
+              <ul class="mb-0">
+                <li>Add a new job vacancy</li>
+                <li>Edit or delete your own vacancies</li>
+                <li>Update your profile (name, email, photo)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h6">Contact</h2>
+        <p class="mb-0">If you have any questions, please contact us.</p>
+          <a href="mailto:support@example.com">support@example.com</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

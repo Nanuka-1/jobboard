@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="mb-3">
+  <h1 class="h2 mb-1">{{ job.title }}</h1>
+  <div class="text-muted">
+    {{ job.company_name }} · {{ job.location }}
+  </div>
+
+
+  {% if current_user.is_authenticated and current_user.id == job.author_id %}
+    <div class="mt-3 d-flex gap-2">
+      <a class="btn btn-outline-primary btn-sm" href="{{ url_for('edit_job', job_id=job.id) }}">Edit</a>
+      <form method="POST" action="{{ url_for('delete_job', job_id=job.id) }}"
+            onsubmit="return confirm('Delete this job?');">
+        {{ delete_form.hidden_tag() if delete_form else "" }}
+        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+      </form>
+    </div>
+  {% endif %}
+</div>
+
+<div class="row g-4">
+  <!-- LEFT: Full description -->
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Description</h5>
+        <div style="white-space: pre-line;">{{ job.full_description }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT-short desc + contact -->
+  <div class="col-lg-4">
+    <!-- Meta card -->
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+          <span class="badge text-bg-primary">{{ job.category.name if job.category else "Other" }}</span>
+          <small class="text-muted">{{ job.created_at.strftime("%Y-%m-%d %H:%M") }}</small>
+        </div>
+
+        <div class="mt-3 fw-semibold">
+          Salary:
+          <span class="fw-normal">{{ job.salary or "Not specified" }}</span>
+        </div>
+
+        <hr>
+
+        <div class="d-flex align-items-center gap-2">
+          {% if job.author and job.author.image_filename %}
+            <img class="rounded-circle"
+                 src="{{ url_for('static', filename='uploads/' ~ job.author.image_filename) }}"
+                 alt="Author"
+                 style="width:40px;height:40px;object-fit:cover;">
+          {% else %}
+            <div class="rounded-circle bg-secondary-subtle"
+                 style="width:40px;height:40px;"></div>
+          {% endif %}
+
+          <div class="lh-sm">
+            <a class="text-decoration-none"
+               href="{{ url_for('user_jobs', user_id=job.author.id) }}">
+              {{ job.author.full_name }}
+            </a>
+            <div class="small text-muted">Author</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Short description -->
+    {% if job.short_description %}
+      <div class="card shadow-sm mb-3">
+        <div class="card-body">
+          <div class="small text-muted mb-1">Short description</div>
+          <div class="small">{{ job.short_description }}</div>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Contact -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Apply / Contact</h5>
+
+        <div class="mb-2">
+          <span class="fw-semibold">Company:</span> {{ job.company_name }}
+        </div>
+
+        {% if job.author %}
+          <div class="mb-2">
+            <span class="fw-semibold">Company email:</span>
+            <a href="mailto:{{ job.author.email }}">{{ job.author.email }}</a>
+          </div>
+          <div class="small text-muted">
+            (For this project, applications go to the author email.)
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <a href="{{ url_for('jobs') }}">&larr; Back to jobs</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

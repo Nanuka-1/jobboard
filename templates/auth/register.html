@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Register · JobBoard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-5">
+
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h3 mb-3">Create account</h1>
+        <p class="text-muted mb-4">Fill in the form to register.</p>
+
+        <form method="POST" novalidate>
+          {{ form.hidden_tag() }}
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.full_name.label.text }}</label>
+            {{ form.full_name(class="form-control", placeholder="Full name") }}
+            {% for err in form.full_name.errors %}
+              <div class="text-danger small mt-1">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.email.label.text }}</label>
+            {{ form.email(class="form-control", placeholder="Email") }}
+            {% for err in form.email.errors %}
+              <div class="text-danger small mt-1">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.password.label.text }}</label>
+            {{ form.password(class="form-control", placeholder="Password") }}
+            {% for err in form.password.errors %}
+              <div class="text-danger small mt-1">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.confirm_password.label.text }}</label>
+            {{ form.confirm_password(class="form-control", placeholder="Repeat password") }}
+            {% for err in form.confirm_password.errors %}
+              <div class="text-danger small mt-1">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            {{ form.submit(class="btn btn-primary") }}
+            <a class="btn btn-outline-secondary" href="{{ url_for('login') }}">Already have an account? Log in</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}403 - Forbidden{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-start gap-3">
+          <div class="display-6 fw-bold text-secondary">403</div>
+          <div>
+            <h1 class="h4 mb-1">Access denied</h1>
+            <p class="text-muted mb-0">
+              You don’t have permission to view this page or modify this job.
+            </p>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <a class="btn btn-primary" href="{{ url_for('jobs') }}">Back to Jobs</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
