@@ -21,6 +21,17 @@ A full-stack Job Board web application built with Flask. Includes authentication
 - SQLite (local) / production-ready config
 - Gunicorn, Render
 
+## Screenshots
+
+### Home
+![Home](screenshots/home.png)
+
+### Login
+![Login](screenshots/login.png)
+
+### Register
+![Register](screenshots/register.png)
+
 ## Run Locally
 
 ### 1) Clone
