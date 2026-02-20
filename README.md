@@ -27,16 +27,3 @@ A full-stack Job Board web application built with Flask. Includes authentication
 ```bash
 git clone https://github.com/Nanuka-1/jobboard.git
 cd jobboard
-
-## Deployment
-Deployed on Render:
-https://jobboard-pe20.onrender.com/
-
-## Screenshots
-
-![Home](home.png)
-![Login](login.png)
-![Register](register.png)
-
-## Author
-Nanuka Apriamova
