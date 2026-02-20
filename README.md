@@ -34,14 +34,9 @@ https://jobboard-pe20.onrender.com/
 
 ## Screenshots
 
-### Home
-![Home](screenshots/home.png)
-
-### Login
-![Login](screenshots/login.png)
-
-### Register
-![Register](screenshots/register.png)
+![Home](home.png)
+![Login](login.png)
+![Register](register.png)
 
 ## Author
 Nanuka Apriamova
