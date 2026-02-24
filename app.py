@@ -88,7 +88,6 @@ login_manager.login_view = "login"
 
 
 with app.app_context():
-    print("DB URL:", db.engine.url.render_as_string(hide_password=True))
     db.create_all()
 
     if Category.query.count() == 0:
