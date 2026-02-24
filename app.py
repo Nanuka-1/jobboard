@@ -75,6 +75,7 @@ if not logger.handlers:
 
 
 db.init_app(app)
+logger.info(f"DB_URI = {app.config['SQLALCHEMY_DATABASE_URI']}")
 csrf = CSRFProtect(app)
 
 login_manager = LoginManager(app)
@@ -222,6 +223,7 @@ def inject_rates():
         return {"rates": rates, "rates_note": "Rates may be outdated (API temporarily unavailable)."}
 
     return {"rates": rates, "rates_note": None}
+
 
 
 
@@ -510,7 +512,7 @@ def job_detail(job_id):
         .get_or_404(job_id)
     )
 
-    delete_form = DeleteForm()  # CSRF token delete ღილაკისთვის
+    delete_form = DeleteForm()
     return render_template("jobs/job_detail.html", job=job, delete_form=delete_form)
 
 
