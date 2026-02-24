@@ -36,9 +36,12 @@ if not secret:
 app.config["SECRET_KEY"] = secret
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
-    "DATABASE_URL",
-    "sqlite:///" + os.path.join(app.instance_path, "jobboard.db"),
+db_url = os.getenv("DATABASE_URL")
+if db_url and db_url.startswith("postgresql://"):
+    db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = db_url or (
+    "sqlite:///" + os.path.join(app.instance_path, "jobboard.db")
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -75,7 +78,7 @@ if not logger.handlers:
 
 
 db.init_app(app)
-logger.info(f"DB_URI = {app.config['SQLALCHEMY_DATABASE_URI']}")
+logger.info("DB backend: %s", "postgres" if db_url else "sqlite")
 csrf = CSRFProtect(app)
 
 login_manager = LoginManager(app)
