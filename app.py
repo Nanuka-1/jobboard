@@ -235,14 +235,7 @@ def inject_rates():
 def about():
     return render_template("about.html")
 
-@app.get("/__dbinfo")
-def __dbinfo():
-    url = db.engine.url.render_as_string(hide_password=True)
-    return {
-        "db_url": url,
-        "database": db.engine.url.database,
-        "driver": db.engine.url.drivername,
-    }
+
 
 
 @app.route("/register", methods=["GET", "POST"])
