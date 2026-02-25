@@ -56,7 +56,7 @@ class Job(db.Model):
     full_description = db.Column(db.Text, nullable=False)
 
     company_name = db.Column(db.String(160), nullable=False)
-    salary = db.Column(db.String(80), nullable=True)   # ტექსტად დავტოვოთ (მოგვიანებით შეიძლება Decimal)
+    salary = db.Column(db.String(80), nullable=True)   
     location = db.Column(db.String(120), nullable=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
