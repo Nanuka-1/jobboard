@@ -1,30 +1,47 @@
-# Job Board (Flask) — Production Ready
+# Job Board — Backend Web Application (Flask)
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-![Flask](https://img.shields.io/badge/Flask-Production%20Ready-black)
-![Docker](https://img.shields.io/badge/Docker-Enabled-blue)
+![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
 ![Deploy](https://img.shields.io/badge/Deploy-Render-purple)
 
-Live demo: https://jobboard-pe20.onrender.com/
-
-A production-ready Job Board web application built with Flask.
-The application supports authentication, job posting management, categories, and user profiles.
-Deployed to Render using Gunicorn and containerized with Docker.
+**Live Demo:**  
+https://jobboard-pe20.onrender.com/
 
 ---
 
-## Features
+## Overview
 
-- User registration / login / logout
+Job Board is a backend-focused web application built with Flask.  
+The project demonstrates authentication flows, relational database design, CRUD operations, structured backend architecture, and containerized deployment.
+
+The application is deployed on Render using Gunicorn and Docker.
+
+---
+
+## Core Features
+
+- User registration, login, and logout
 - Secure password hashing
 - Session-based authentication (Flask-Login)
-- Job posts CRUD (create, view, edit, delete)
-- Categories support
-- Basic user profile page
-- Forms validation (WTForms)
+- Full CRUD operations for job listings
+- Category-based filtering
+- User profile page
+- Form validation (WTForms)
 - CSRF protection (Flask-WTF)
-- Logging of authentication and key actions
+- Structured logging of authentication and key actions
 - Production deployment with Gunicorn
+
+---
+
+## Backend Architecture
+
+- Modular Flask application structure
+- SQLAlchemy ORM with relational models
+- Database relationships (User ↔ Jobs ↔ Categories)
+- Environment-based configuration
+- Separation of development and production environments
+- Containerized deployment with Docker
 
 ---
 
@@ -34,12 +51,11 @@ Deployed to Render using Gunicorn and containerized with Docker.
 - Flask
 - SQLAlchemy ORM
 - Flask-Login
-- Flask-WTF (CSRF)
-- WTForms
-- SQLite (local development)
-- Gunicorn (production server)
+- Flask-WTF / WTForms
+- SQLite (development)
+- Gunicorn (WSGI server)
 - Docker
-- Render (deployment)
+- Render (cloud deployment)
 
 ---
 
@@ -58,6 +74,7 @@ docker run -p 8000:8000 jobboard
 ```
 
 Application will be available at:
+
 http://localhost:8000
 
 ---
@@ -90,7 +107,7 @@ pip install -r requirements.txt
 flask run
 ```
 
-Or with Gunicorn:
+Or in production mode:
 
 ```bash
 gunicorn app:app
@@ -108,3 +125,20 @@ gunicorn app:app
 
 ### Register
 ![Register](screenshots/register.png)
+
+---
+
+## Future Improvements
+
+- JWT-based authentication (API-ready version)
+- Pagination and search filtering
+- Role-based permissions
+- PostgreSQL production configuration
+- Automated testing (pytest)
+
+---
+
+## Author
+
+Nanuka Apriamova  
+Junior Python Backend Developer  
