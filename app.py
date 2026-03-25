@@ -115,11 +115,13 @@ def tbc_get_commercial_rates(currencies=("USD", "EUR", "GBP")):
     url = f"{base_url}/v1/exchange-rates/commercial"
 
     headers = {"apikey": api_key}
-    params = {"currency": ",".join(c.lower() for c in currencies)}
+    params = {}
 
     resp = requests.get(url, headers=headers, params=params, timeout=5)
     resp.raise_for_status()
-    return resp.json()
+    data = resp.json()
+    logger.info(f"TBC response: {data}")
+    return data
 
 
 def get_rates_tbc():
