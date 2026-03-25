@@ -87,18 +87,18 @@ login_manager.login_view = "login"
 
 
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
-    if Category.query.count() == 0:
-        db.session.add_all([
-            Category(name="IT"),
-            Category(name="Design"),
-            Category(name="Marketing"),
-            Category(name="Sales"),
-            Category(name="Other"),
-        ])
-        db.session.commit()
+#     if Category.query.count() == 0:
+#         db.session.add_all([
+#             Category(name="IT"),
+#             Category(name="Design"),
+#             Category(name="Marketing"),
+#             Category(name="Sales"),
+#             Category(name="Other"),
+#         ])
+#         db.session.commit()
 
 
 
