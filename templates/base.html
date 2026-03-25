@@ -102,18 +102,18 @@
     <div class="container small">
   {% if rates %}
   <div class="ticker">
+   <div class="ticker">
     <div class="ticker__track">
-      {% for _ in range(3) %}
-        <span class="me-4">
-          <strong>Exchange rates ({{ rates.date }}):</strong>
-          1 USD = <strong>{{ "%.4f"|format(rates.usd_gel) }}</strong> GEL ·
-          1 EUR = <strong>{{ "%.4f"|format(rates.eur_gel) }}</strong> GEL ·
-          1 GBP = <strong>{{ "%.4f"|format(rates.gbp_gel) }}</strong> GEL ·
-          1 USD = <strong>{{ "%.4f"|format(rates.usd_eur) }}</strong> EUR
-        </span>
-      {% endfor %}
+        {% for _ in range(3) %}
+            <span class="me-4">
+                <strong>Exchange rates ({{ rates.date }}):</strong>
+                {% for currency, value in rates.rates.items() %}
+                    1 {{ currency }} = <strong>{{ "%.4f"|format(value) }}</strong> {{ rates.base }}{% if not loop.last %} · {% endif %}
+                {% endfor %}
+            </span>
+        {% endfor %}
     </div>
-  </div>
+</div>
 {% else %}
   <div class="text-secondary">Rates: not available</div>
 {% endif %}
