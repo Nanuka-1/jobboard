@@ -117,7 +117,7 @@ def tbc_get_commercial_rates(currencies=("USD", "EUR", "GBP")):
     headers = {"apikey": api_key}
     params = {}
 
-    resp = requests.get(url, headers=headers, params=params, timeout=5)
+    resp = requests.get(url, headers=headers, params=params, timeout=2)
     resp.raise_for_status()
     data = resp.json()
     logger.info(f"TBC response: {data}")
@@ -214,18 +214,13 @@ def load_user(user_id):
 
 @app.context_processor
 def inject_rates():
-
-    if not app.config.get("TBC_API_KEY"):
-        return {"rates": None, "rates_note": "Rates are not configured (no API key)."}
-
-
-    rates = get_rates_tbc_cached()
+    try:
+        rates = get_rates_tbc_cached()
+    except Exception:
+        return {"rates": None, "rates_note": "Rates unavailable"}
 
     if rates is None:
-        return {"rates": None, "rates_note": "Rates unavailable right now."}
-
-    if rates.get("stale"):
-        return {"rates": rates, "rates_note": "Rates may be outdated (API temporarily unavailable)."}
+        return {"rates": None, "rates_note": "Rates unavailable"}
 
     return {"rates": rates, "rates_note": None}
 
