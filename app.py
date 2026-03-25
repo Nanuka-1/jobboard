@@ -125,9 +125,8 @@ def tbc_get_commercial_rates(currencies=("USD", "EUR", "GBP")):
 
 
 def get_rates_tbc():
-
     try:
-        data = tbc_get_commercial_rates(("USD", "EUR", "GBP"))
+        data = tbc_get_commercial_rates()
 
         items = (
             data.get("commercialRatesList")
@@ -136,10 +135,14 @@ def get_rates_tbc():
             or []
         )
 
-        mapping = {}
+        rates = {}
 
         if isinstance(items, dict):
-            mapping = {k.upper(): float(v) for k, v in items.items()}
+            for currency, value in items.items():
+                try:
+                    rates[currency.upper()] = float(value)
+                except (TypeError, ValueError):
+                    continue
 
         elif isinstance(items, list):
             for it in items:
@@ -153,29 +156,24 @@ def get_rates_tbc():
                 rate = None
                 for key in ("sell", "sellRate", "rate", "value", "buy", "buyRate"):
                     if it.get(key) is not None:
-                        rate = float(it[key])
-                        break
+                        try:
+                            rate = float(it[key])
+                            break
+                        except (TypeError, ValueError):
+                            continue
 
                 if rate is not None:
-                    mapping[ccy] = rate
+                    rates[ccy] = rate
 
-        usd_gel = mapping.get("USD")
-        eur_gel = mapping.get("EUR")
-        gbp_gel = mapping.get("GBP")
-
-        if usd_gel is None or eur_gel is None or gbp_gel is None:
+        if not rates:
             logger.warning(
-                f"tbc_rates_parse_failed keys={list(data.keys())} mapping={mapping}"
+                f"tbc_rates_parse_failed keys={list(data.keys())} rates={rates}"
             )
             return None
 
-        usd_eur = usd_gel / eur_gel
-
         return {
-            "usd_gel": usd_gel,
-            "eur_gel": eur_gel,
-            "gbp_gel": gbp_gel,
-            "usd_eur": usd_eur,
+            "base": data.get("base", "GEL"),
+            "rates": rates,
             "date": data.get("date") or date.today().isoformat(),
         }
 
