@@ -88,8 +88,8 @@ login_manager.login_view = "login"
 
 
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 #     if Category.query.count() == 0:
 #         db.session.add_all([
