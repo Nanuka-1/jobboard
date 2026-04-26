@@ -37,8 +37,9 @@ app.config["SECRET_KEY"] = secret
 
 
 db_url = os.getenv("DATABASE_URL")
-if db_url and db_url.startswith("postgresql://"):
-    db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
+
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url or (
     "sqlite:///" + os.path.join(app.instance_path, "jobboard.db")
