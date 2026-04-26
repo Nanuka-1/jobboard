@@ -92,18 +92,20 @@ with app.app_context():
     try:
         db.create_all()
         print("Tables created")
+
+        if Category.query.count() == 0:
+            db.session.add_all([
+                Category(name="IT"),
+                Category(name="Design"),
+                Category(name="Marketing"),
+                Category(name="Sales"),
+                Category(name="Other"),
+            ])
+            db.session.commit()
+            print("Categories seeded")
+
     except Exception as e:
         print("DB error:", e)
-
-     if Category.query.count() == 0:
-         db.session.add_all([
-             Category(name="IT"),
-             Category(name="Design"),
-             Category(name="Marketing"),
-             Category(name="Sales"),
-             Category(name="Other"),
-         ])
-         db.session.commit()
 
 
 
