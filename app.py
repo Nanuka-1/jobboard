@@ -95,15 +95,15 @@ with app.app_context():
     except Exception as e:
         print("DB error:", e)
 
-#     if Category.query.count() == 0:
-#         db.session.add_all([
-#             Category(name="IT"),
-#             Category(name="Design"),
-#             Category(name="Marketing"),
-#             Category(name="Sales"),
-#             Category(name="Other"),
-#         ])
-#         db.session.commit()
+     if Category.query.count() == 0:
+         db.session.add_all([
+             Category(name="IT"),
+             Category(name="Design"),
+             Category(name="Marketing"),
+             Category(name="Sales"),
+             Category(name="Other"),
+         ])
+         db.session.commit()
 
 
 
