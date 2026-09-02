@@ -138,7 +138,4 @@ gunicorn app:app
 
 ---
 
-## Author
 
-Nanuka Apriamova  
-Junior Python Backend Developer  
